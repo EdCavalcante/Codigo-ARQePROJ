@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+//Controller: Ele recebe as atividades e delega elas, se eu não tivesse ele a interface teria que acessar diretamente o repositório e controlar as operações.
+
+public class GerenciadorAtividades {
+
+    // Atributo que permite acessar o repositório
+    private AtividadeRepositorio repositorio;
+
+    public GerenciadorAtividades() {
+        repositorio = AtividadeRepositorio.getInstancia();
+    }
+
+
+  
+    public boolean cadastrar(AtividadeDados atividade) {
+        return repositorio.adicionar(atividade);
+    }
+
+
+    public ArrayList<AtividadeDados> listar() {
+        return repositorio.listar();
+    }
+
+
+    public boolean atualizar(
+            int id,
+            String novoTitulo,
+            String novaDataEntrega) {
+
+        return repositorio.atualizar(
+                id,
+                novoTitulo,
+                novaDataEntrega
+        );
+    }
+
+    // Recebe a solicitação de exclusão
+    // e delega a operação para o repositório
+    public boolean excluir(int id) {
+        return repositorio.excluir(id);
+    }
+
+}
