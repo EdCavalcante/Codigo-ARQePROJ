@@ -3,8 +3,11 @@ import java.util.ArrayList;
 public class AtividadeRepositorio {
 
     
-    // Singletom: Se eu nao tivesse ele, toda vez que eu instanciasse meu repositiorio ou seja chamsse ele pra colcoar atividade, criaria uma nova lista e as informaç~eos ficariam soltas
-    //Information Expert: Para evitar de que as operações fiquem separadas por todo o código, logo elas ficam dentro da propia classe do repositorio, já que é ele que tem esses dados
+    // Singletom: Se eu nao tivesse ele, toda vez que eu instanciasse meu repositiorio ou seja chamsse ele pra colcoar atividade,
+    //criaria uma nova lista e as informaç~eos ficariam soltas
+
+    //Information Expert: Para evitar de que as operações fiquem separadas por todo o código, 
+    //logo elas ficam dentro da propia classe do repositorio, já que é ele que tem esses dados
 
     // a única instância do repositório
     private static AtividadeRepositorio instancia;
