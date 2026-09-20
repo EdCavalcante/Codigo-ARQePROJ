@@ -1,0 +1,126 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner leitor = new Scanner(System.in);
+        SistemaAtividades sistema = new SistemaAtividades();
+
+        int opcao;
+
+        do {
+            System.out.println("\n======================================");
+            System.out.println(" SISTEMA DE ATIVIDADES ACADÊMICAS");
+            System.out.println("======================================");
+            System.out.println("1 - Cadastrar atividade");
+            System.out.println("2 - Listar atividades");
+            System.out.println("3 - Atualizar atividade");
+            System.out.println("4 - Excluir atividade");
+            System.out.println("0 - Sair");
+            System.out.print("Digite uma opção: ");
+
+            opcao = leitor.nextInt();
+            leitor.nextLine();
+
+            switch (opcao) {
+
+                case 1:
+                    System.out.print("Digite o ID da atividade: ");
+                    int idCadastro = leitor.nextInt();
+                    leitor.nextLine();
+
+                    System.out.print("Digite o título: ");
+                    String titulo = leitor.nextLine();
+
+                    System.out.print("Digite a data de entrega: ");
+                    String dataEntrega = leitor.nextLine();
+
+                    boolean cadastrou = sistema.cadastrarAtividade(
+                            idCadastro,
+                            titulo,
+                            dataEntrega
+                    );
+
+                    if (cadastrou) {
+                        System.out.println("Atividade cadastrada com sucesso!");
+                    } else {
+                        System.out.println("Já existe uma atividade com esse ID.");
+                    }
+
+                    break;
+
+                case 2:
+                    ArrayList<AtividadeDados> atividades =
+                            sistema.listarAtividades();
+
+                    if (atividades.isEmpty()) {
+                        System.out.println("Nenhuma atividade cadastrada.");
+                    } else {
+                        System.out.println("\nATIVIDADES CADASTRADAS");
+
+                        for (AtividadeDados atividade : atividades) {
+                            System.out.println("------------------------------");
+                            System.out.println(atividade);
+                        }
+
+                        System.out.println("------------------------------");
+                    }
+
+                    break;
+
+                case 3:
+                    System.out.print("Digite o ID da atividade: ");
+                    int idAtualizacao = leitor.nextInt();
+                    leitor.nextLine();
+
+                    System.out.print("Digite o novo título: ");
+                    String novoTitulo = leitor.nextLine();
+
+                    System.out.print("Digite a nova data de entrega: ");
+                    String novaDataEntrega = leitor.nextLine();
+
+                    boolean atualizou = sistema.atualizarAtividade(
+                            idAtualizacao,
+                            novoTitulo,
+                            novaDataEntrega
+                    );
+
+                    if (atualizou) {
+                        System.out.println("Atividade atualizada com sucesso!");
+                    } else {
+                        System.out.println("Atividade não encontrada.");
+                    }
+
+                    break;
+
+                case 4:
+                    System.out.print("Digite o ID da atividade: ");
+                    int idExclusao = leitor.nextInt();
+                    leitor.nextLine();
+
+                    boolean excluiu =
+                            sistema.excluirAtividade(idExclusao);
+
+                    if (excluiu) {
+                        System.out.println("Atividade excluída com sucesso!");
+                    } else {
+                        System.out.println("Atividade não encontrada.");
+                    }
+
+                    break;
+
+                case 0:
+                    System.out.println("Sistema encerrado.");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+        } while (opcao != 0);
+
+        leitor.close();
+    }
+}
