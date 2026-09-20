@@ -1,0 +1,96 @@
+import java.util.ArrayList;
+
+public class AtividadeRepositorio {
+
+    
+    // Singletom: Se eu nao tivesse ele, toda vez que eu instanciasse meu repositiorio ou seja chamsse ele pra colcoar atividade, criaria uma nova lista e as informaç~eos ficariam soltas
+    //Information Expert: Para evitar de que as operações fiquem separadas por todo o código, logo elas ficam dentro da propia classe do repositorio, já que é ele que tem esses dados
+
+    // a única instância do repositório
+    private static AtividadeRepositorio instancia;
+
+    private AtividadeRepositorio() {
+        atividades = new ArrayList<>();
+    }
+
+    
+    public static AtividadeRepositorio getInstancia() {
+
+        if (instancia == null) {
+            instancia = new AtividadeRepositorio();
+        }
+
+        return instancia;
+    }
+
+
+    private ArrayList<AtividadeDados> atividades;
+
+
+
+
+
+
+
+  
+    public boolean adicionar(AtividadeDados atividade) {
+
+        if (buscarPorId(atividade.getId()) != null) {
+            return false;
+        }
+
+        atividades.add(atividade);
+        return true;
+    }
+
+    
+    public ArrayList<AtividadeDados> listar() {
+        return atividades;
+    }
+
+    
+    public AtividadeDados buscarPorId(int id) {
+
+        for (AtividadeDados atividade : atividades) {
+
+            if (atividade.getId() == id) {
+                return atividade;
+            }
+        }
+
+        return null;
+    }
+
+    
+    public boolean atualizar(
+            int id,
+            String novoTitulo,
+            String novaDataEntrega) {
+
+        AtividadeDados atividade = buscarPorId(id);
+
+        if (atividade == null) {
+            return false;
+        }
+
+        atividade.setTitulo(novoTitulo);
+        atividade.setDataEntrega(novaDataEntrega);
+
+        return true;
+    }
+
+   
+    public boolean excluir(int id) {
+
+        AtividadeDados atividade = buscarPorId(id);
+
+        if (atividade == null) {
+            return false;
+        }
+
+        atividades.remove(atividade);
+        return true;
+    }
+
+    
+}
