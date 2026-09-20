@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+
+public class SistemaAtividades {
+
+    private GerenciadorAtividades gerenciador;
+
+    public SistemaAtividades() {
+        gerenciador = new GerenciadorAtividades();
+    }
+
+    
+    // Facade: para oferecer à Main uma entrada simples para todas as funcionalidades e esconder as classes internas do sistema.
+
+    public boolean cadastrarAtividade(
+            int id,
+            String titulo,
+            String dataEntrega) {
+
+        AtividadeDados atividade =
+                new AtividadeDados(id, titulo, dataEntrega);
+
+        return gerenciador.cadastrar(atividade);
+    }
+
+    public ArrayList<AtividadeDados> listarAtividades() {
+        return gerenciador.listar();
+    }
+
+    public boolean atualizarAtividade(
+            int id,
+            String novoTitulo,
+            String novaDataEntrega) {
+
+        return gerenciador.atualizar(
+                id,
+                novoTitulo,
+                novaDataEntrega
+        );
+    }
+
+    public boolean excluirAtividade(int id) {
+        return gerenciador.excluir(id);
+    }
+
+}
